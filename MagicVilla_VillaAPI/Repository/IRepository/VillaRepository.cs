@@ -27,9 +27,7 @@ namespace MagicVilla_VillaAPI.Repository
             {
                 query = query.Where(filter);
             }
-#pragma warning disable CS8603 // Possible null reference return.
             return await query.FirstOrDefaultAsync();
-#pragma warning restore CS8603 // Possible null reference return.
         }
 
         public async Task<List<Villa>> GetAll(Expression<Func<Villa, bool>> filter = null)
