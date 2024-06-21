@@ -1,13 +1,13 @@
 ﻿
+using MagicVilla_VillaAPI.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace MagicVilla_VillaAPI.Repository
 {
-    internal class ApplicationDbContent
+    public class ApplicationDbContent : DbContext
     {
-        public object Villas { get; internal set; }
+        public DbSet<Villa>Villas { get; internal set; }
 
-        internal async Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }
