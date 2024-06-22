@@ -1,7 +1,7 @@
 ﻿using MagicVilla_VillaAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MagicVilla_VillaAPI.Data
+namespace MagicVilla_VillaAPI.Repository.IRepository
 {
     public class ApplicationDbContext : DbContext
     {

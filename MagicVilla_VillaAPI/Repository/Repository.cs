@@ -6,33 +6,37 @@ using System.Linq.Expressions;
 
 namespace MagicVilla_VillaAPI.Repository
 {
-    public class VillaRepository : IVillaRepository
+    public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly ApplicationDbContent _db;
-        public VillaRepository(ApplicationDbContent db)
+        private readonly ApplicationDbContext _db;
+        internal DbSet<T> dbSet;
+        public Repository(ApplicationDbContext db)
         {
             _db = db;
+            this.dbSet=_db.Set<T>();
         }
-        public async Task Create(Villa entity)
+        public async Task Create(T entity)
         {
-            await _db.Villas.AddAsync (entity);
+            await dbSet.AddAsync(entity);
             await SaveAsync();
         }
 
-        public async Task<Villa> GetAsync(Expression<Func<Villa, bool>> filter = null, bool tracked = true)
+        public async Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, bool tracked = true)
         {
-            IQueryable<Villa> query = (IQueryable<Villa>)_db.Villas;
+            IQueryable<T> query = dbSet;
 
             if (filter != null)
             {
                 query = query.Where(filter);
             }
+#pragma warning disable CS8603 // Possible null reference return.
             return await query.FirstOrDefaultAsync();
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
-        public async Task<List<Villa>> GetAllAsync(Expression<Func<Villa, bool>> filter = null)
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null)
         {
-            IQueryable<Villa> query = (IQueryable<Villa>)_db.Villas;
+            IQueryable<T> query = dbSet;
 
             if (filter != null)
             {
@@ -41,9 +45,9 @@ namespace MagicVilla_VillaAPI.Repository
             return await query.ToListAsync();
         }
 
-        public async Task RemoveAsync(Villa entity)
+        public async Task RemoveAsync(T entity)
         {
-            _db.Villas.Remove(entity);
+            dbSet.Remove(entity);
             await SaveAsync();
         }
 
@@ -57,10 +61,9 @@ namespace MagicVilla_VillaAPI.Repository
             throw new NotImplementedException();
         }
 
-        public async Task UpdateAsync(Villa entity)
+        public Task CreateAsync(T entity)
         {
-            _db.Villas.Update(entity);
-            await SaveAsync();
+            throw new NotImplementedException();
         }
     }
 }
