@@ -1,7 +1,7 @@
 ﻿using MagicVilla_VillaAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MagicVilla_VillaAPI.Repository.IRepository
+namespace MagicVilla_VillaAPI.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -11,6 +11,8 @@ namespace MagicVilla_VillaAPI.Repository.IRepository
         }
 
         public DbSet<Villa> Villas { get; set; }
+        public DbSet<VillaNumber> VillaNumbers { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
