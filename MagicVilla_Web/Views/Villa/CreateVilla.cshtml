@@ -1,0 +1,21 @@
+﻿@model MagicVilla_Web.Models.Dto.VillaCreateDTO
+
+<form asp-action="CreateVilla">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-black-primary">Create Villa</h1>
+        <hr />
+
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-2">
+                <label asp-for="Name" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>

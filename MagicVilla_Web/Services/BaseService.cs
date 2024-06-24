@@ -69,5 +69,10 @@ namespace MagicVilla_Web.Services
                 return APIResponse;
             }
         }
+
+        public Task<T> SendAsync<T>(APIRequest apiRequest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

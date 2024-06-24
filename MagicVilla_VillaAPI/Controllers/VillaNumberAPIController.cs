@@ -19,7 +19,8 @@ namespace MagicVilla_VillaAPI.Controllers
         private readonly IVillaNumberRepository _dbVillaNumber;
         private readonly IVillaRepository _dbVilla;
         private readonly IMapper _mapper;
-        public VillaNumberAPIController(IVillaNumberRepository dbVillaNumber, IMapper mapper, IVillaRepository)
+        public VillaNumberAPIController(IVillaNumberRepository dbVillaNumber, IMapper mapper, IVillaRepository dbVilla)
+
         {
             _dbVillaNumber = dbVillaNumber;
             _mapper = mapper;
