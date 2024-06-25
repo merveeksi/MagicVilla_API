@@ -25,6 +25,11 @@ namespace MagicVilla_Web.Services
             });
         }
 
+        public Task CreateAsync<T>(MagicVilla_VillaAPI.Models.Dto.VillaCreateDTO model)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<T> DeleteAsync<T>(int id)
         {
             return SendAsync<T>(new APIRequest()
