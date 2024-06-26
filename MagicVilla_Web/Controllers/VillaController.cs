@@ -23,20 +23,17 @@ namespace MagicVilla_Web.Controllers
 
         public async Task<IActionResult> IndexVilla()
         {
-            List<villaDTO> list = new();
+            List<VillaDTO> list = new();
 
             var response = await _villaService.GetAllAsync<APIResponse>();
             if (response != null && response.IsSuccess)
             {
-                list = JsonConvert.DeserializeObject<List<villaDTO>>(Convert.ToString(response.Result));
+                list = JsonConvert.DeserializeObject<List<VillaDTO>>(Convert.ToString(response.Result));
             }
 
             return View(list);
         }
-        public IActionResult CreateVilla()
-        {
-            return View();
-        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateVilla(VillaCreateDTO model)
