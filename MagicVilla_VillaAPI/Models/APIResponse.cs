@@ -8,5 +8,6 @@ namespace MagicVilla_VillaAPI.Models
         public bool IsSuccess { get; set; } = true;
         public List<string> ErrorMessage { get; set; }
         public object Result { get; set; }
-    }
+		public List<string> ErrorMessages { get; internal set; }
+	}
 }
