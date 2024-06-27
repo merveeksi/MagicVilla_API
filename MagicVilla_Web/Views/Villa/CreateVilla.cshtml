@@ -3,7 +3,7 @@
 <form asp-action="CreateVilla">
     <br />
     <div class="container border p-3">
-        <h1 class="text-black-primary">Create Villa</h1>
+        <h1 class="text-primary">Create Villa</h1>
         <hr />
 
         <div class="row">
@@ -16,6 +16,7 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
             <div class="col-2">
                 <label asp-for="Rate" class="control-label pt-2" style="font-size:20px;"></label>
             </div>
@@ -31,6 +32,7 @@
                 <textarea asp-for="Details" class="form-control" rows="5"></textarea>
                 <span asp-validation-for="Details" class="text-danger"></span>
             </div>
+
             <div class="col-2">
                 <label asp-for="ImageUrl" class="control-label pt-2" style="font-size:20px;"></label>
             </div>
@@ -38,6 +40,7 @@
                 <input asp-for="ImageUrl" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
+
             <div class="col-2">
                 <label asp-for="Occupancy" class="control-label pt-2" style="font-size:20px;"></label>
             </div>
@@ -45,6 +48,7 @@
                 <input asp-for="Occupancy" class="form-control" />
                 <span asp-validation-for="Occupancy" class="text-danger"></span>
             </div>
+
             <div class="col-2">
                 <label asp-for="Sqft" class="control-label pt-2" style="font-size:20px;"></label>
             </div>
@@ -52,6 +56,7 @@
                 <input asp-for="Sqft" class="form-control" />
                 <span asp-validation-for="Sqft" class="text-danger"></span>
             </div>
+
             <div class="col-2">
                 <label asp-for="Amenity" class="control-label pt-2" style="font-size:20px;"></label>
             </div>
@@ -60,7 +65,7 @@
                 <span asp-validation-for="Amenity" class="text-danger"></span>
             </div>
             <div class="col-5 offset-2">
-                <a asp-action="IndexVilla" asp-controller="Villa" class="btn-primary btn form-control">Back to list</a>
+                <a asp-action="IndexVilla" asp-controller="Villa" class="btn-primary btn form-control ">Back to List</a>
             </div>
             <div class="col-5">
                 <input type="submit" value="Create" class="btn btn-success form-control" />
@@ -69,6 +74,7 @@
     </div>
 </form>
 
+
 @section Scripts {
-    <partial name="_ValidationScriptsPartial"/>
+    <partial name="_ValidationScriptsPartial" />
 }

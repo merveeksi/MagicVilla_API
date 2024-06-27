@@ -1,5 +1,4 @@
-﻿using MagicVilla_Utility;
-using MagicVilla_Web.Models;
+﻿using MagicVilla_Web.Models;
 
 namespace MagicVilla_Web.Services.IServices
 {
@@ -7,6 +6,5 @@ namespace MagicVilla_Web.Services.IServices
     {
         APIResponse responseModel { get; set; }
         Task<T> SendAsync<T>(APIRequest apiRequest);
-        Task<T> SendAsync<T>(APIRequest apiRequest, SD sD);
     }
 }

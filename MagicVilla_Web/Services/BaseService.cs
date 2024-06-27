@@ -2,6 +2,7 @@
 using MagicVilla_Web.Models;
 using MagicVilla_Web.Services.IServices;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace MagicVilla_Web.Services
@@ -15,14 +16,8 @@ namespace MagicVilla_Web.Services
             this.responseModel = new();
             this.httpClient = httpClient;
         }
-
-        public async Task<T> SendAsync<T>(APIRequest apiRequest, SD sD)
+        public async Task<T> SendAsync<T>(APIRequest apiRequest)
         {
-            if (sD is null)
-            {
-                throw new ArgumentNullException(nameof(sD));
-            }
-
             try
             {
                 var client = httpClient.CreateClient("MagicAPI");
@@ -49,11 +44,35 @@ namespace MagicVilla_Web.Services
                         message.Method = HttpMethod.Get;
                         break;
                 }
+
                 HttpResponseMessage apiResponse = null;
+
+                //if (!string.IsNullOrEmpty(apiRequest.Token))
+                //{
+                //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
+                //}
 
                 apiResponse = await client.SendAsync(message);
 
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
+                try
+                {
+                    APIResponse ApiResponse = JsonConvert.DeserializeObject<APIResponse>(apiContent);
+                    if (ApiResponse != null && (apiResponse.StatusCode == System.Net.HttpStatusCode.BadRequest
+                        || apiResponse.StatusCode == System.Net.HttpStatusCode.NotFound))
+                    {
+                        ApiResponse.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                        ApiResponse.IsSuccess = false;
+                        var res = JsonConvert.SerializeObject(ApiResponse);
+                        var returnObj = JsonConvert.DeserializeObject<T>(res);
+                        return returnObj;
+                    }
+                }
+                catch (Exception e)
+                {
+                    var exceptionResponse = JsonConvert.DeserializeObject<T>(apiContent);
+                    return exceptionResponse;
+                }
                 var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
                 return APIResponse;
             }
@@ -68,11 +87,6 @@ namespace MagicVilla_Web.Services
                 var APIResponse = JsonConvert.DeserializeObject<T> (res);
                 return APIResponse;
             }
-        }
-
-        public Task<T> SendAsync<T>(APIRequest apiRequest)
-        {
-            throw new NotImplementedException();
         }
     }
 }
