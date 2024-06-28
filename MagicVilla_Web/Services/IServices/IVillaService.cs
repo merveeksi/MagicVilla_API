@@ -9,5 +9,7 @@ namespace MagicVilla_Web.Services.IServices
         Task<T> CreateAsync<T>(VillaCreateDTO dto, string token);
         Task<T> UpdateAsync<T>(VillaUpdateDTO dto, string token);
         Task<T> DeleteAsync<T>(int id, string token);
-    }
+		Task GetAllAsync<T>();
+		Task CreateAsync<T>(VillaCreateDTO model);
+	}
 }

@@ -1,21 +1,18 @@
 ﻿using AutoMapper;
-using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Models;
 using MagicVilla_VillaAPI.Models.Dto;
-using MagicVilla_VillaAPI.Repository.IRepository;
+using MagicVilla_VillaAPI.Repository.IRepostiory;
+
 //using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Drawing.Printing;
 using System.Net;
 //using System.Text.Json;
 
 namespace MagicVilla_VillaAPI.Controllers
 {
-    //    [Route("api/[controller]")] alttakiyle aynı işlevi görüyor. Dosya adının değişmesi ihtimaline karşın bu satır daha kullanışlı olacaktır.
-    [Route("api/villaAPI")]
+	//    [Route("api/[controller]")] alttakiyle aynı işlevi görüyor. Dosya adının değişmesi ihtimaline karşın bu satır daha kullanışlı olacaktır.
+	[Route("api/villaAPI")]
     [ApiController]
     public class VillaAPIController : ControllerBase
     {

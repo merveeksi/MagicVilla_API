@@ -1,13 +1,13 @@
 ﻿using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Models;
-using MagicVilla_VillaAPI.Repository.IRepository;
+using MagicVilla_VillaAPI.Repository.IRepostiory;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace MagicVilla_VillaAPI.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
-    {
+	public class Repository<T> : IRepository<T> where T : class
+	{
         private readonly ApplicationDbContext _db;
         internal DbSet<T> dbSet;
         public Repository(ApplicationDbContext db)
@@ -21,9 +21,9 @@ namespace MagicVilla_VillaAPI.Repository
             await dbSet.AddAsync(entity);
             await SaveAsync();
         }
-        //"Villa, VillaSpecial"
-        public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
-        {
+		//"Villa, VillaSpecial"
+		public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
+		{
             IQueryable<T> query = dbSet;
 
             if (!tracked)
@@ -44,9 +44,9 @@ namespace MagicVilla_VillaAPI.Repository
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
-        {
-            IQueryable<T> query = dbSet;
+		public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+		{
+			IQueryable<T> query = dbSet;
 
             if (filter != null)
             {
@@ -74,9 +74,9 @@ namespace MagicVilla_VillaAPI.Repository
             await _db.SaveChangesAsync();
         }
 
-        public Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter = null, string includeProperties = null)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter = null, string includeProperties = null, int pageSize = 0, int pageNumber = 1)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
