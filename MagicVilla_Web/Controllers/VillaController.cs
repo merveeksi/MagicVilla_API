@@ -32,13 +32,13 @@ namespace MagicVilla_Web.Controllers
             }
             return View(list);
         }
-        public async Task<IActionResult> CreateVilla()
-        {
-            return View();
-        }
+		public IActionResult CreateVilla()
+		{
+			return View();
+		}
 
 
-        [HttpPost]
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateVilla(VillaCreateDTO model)
         {
