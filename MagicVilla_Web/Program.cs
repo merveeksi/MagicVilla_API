@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddHttpClient<IVillaService, VillaService>();
@@ -27,12 +28,11 @@ builder.Services.AddScoped<IVillaNumberService, VillaNumberService>();
 //				  options.AccessDeniedPath = "/Auth/AccessDenied";
 //				  options.SlidingExpiration = true;
 //			  });
-//builder.Services.AddSession(options =>
-//{
-//	options.IdleTimeout = TimeSpan.FromMinutes(100);
-//	options.Cookie.HttpOnly = true;
-//	options.Cookie.IsEssential = true;
-//});
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromMinutes(100);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

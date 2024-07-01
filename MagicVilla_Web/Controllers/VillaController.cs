@@ -5,6 +5,7 @@ using MagicVilla_Web.Models.Dto;
 using MagicVilla_Web.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Reflection;
@@ -15,10 +16,11 @@ namespace MagicVilla_Web.Controllers
     {
         private readonly IVillaService _villaService;
         private readonly IMapper _mapper;
-        public VillaController(IVillaService villaService, IMapper mapper)
-        {
+        private readonly ILogger<VillaController> logger;
+        public VillaController(IVillaService villaService, IMapper mapper, ILogger<VillaController> logger) {
             _villaService = villaService;
             _mapper = mapper;
+            this.logger = logger;
         }
 
         public async Task<IActionResult> IndexVilla()
@@ -26,22 +28,21 @@ namespace MagicVilla_Web.Controllers
             List<VillaDTO> list = new();
 
             var response = await _villaService.GetAllAsync<APIResponse>();
-            if (response != null && response.IsSuccess)
-            {
+            if(response != null && response.IsSuccess) {
                 list = JsonConvert.DeserializeObject<List<VillaDTO>>(Convert.ToString(response.Result));
             }
             return View(list);
         }
-		public IActionResult CreateVilla()
-		{
-			return View();
-		}
+        public async Task<IActionResult> CreateVilla()
+        {
+            return View();
+        }
 
 
-		[HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateVilla(VillaCreateDTO model)
-        {
+        { 
             if (ModelState.IsValid)
             {
 
